@@ -1,0 +1,8 @@
+# Raw security assessment reports
+/reports/
+
+# Sensitive configuration
+.env
+.env.*
+*.kubeconfig
+*.key

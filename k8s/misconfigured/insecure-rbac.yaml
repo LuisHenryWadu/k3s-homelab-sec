@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: rbac-lab-sa
+  namespace: security-lab
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: rbac-lab-reader
+  namespace: security-lab
+rules:
+  - apiGroups: [""]
+    resources: ["pods", "secrets"]
+    verbs: ["get", "list"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: rbac-lab-binding
+  namespace: security-lab
+subjects:
+  - kind: ServiceAccount
+    name: rbac-lab-sa
+    namespace: security-lab
+roleRef:
+  kind: Role
+  name: rbac-lab-reader
+  apiGroup: rbac.authorization.k8s.io
